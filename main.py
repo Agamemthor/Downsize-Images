@@ -35,7 +35,6 @@ for root, dirs, files in os.walk(path):
         ext = split[1].lower()
 
         #convert to jpg if bmp
-        #probably better off to include this section in bChange later on, and only save the image once instead of twice.
         if ext == 'bmp':
             filePath = dim.ConvertToJPG(filePath)
             ext = 'jpg'
@@ -71,14 +70,21 @@ for root, dirs, files in os.walk(path):
 
             tmpPath = os.path.join(tmpFolder, name + '.' + ext)
             scaledImg = cv2.resize(img, (newWidth, newHeight), interpolation=cv2.INTER_AREA)
-
-            cv2.imwrite(tmpPath, scaledImg)
-
+            
+            try:
+                cv2.imwrite(tmpPath, scaledImg)
+            except:
+                print("Error saving image file: " + tmpPath)
+                continue
+                
             if os.path.getsize(tmpPath) < curSize:
                 cv2.imwrite(filePath, scaledImg)
-
-            os.remove(tmpPath)
-                
+            
+            try:
+                os.remove(tmpPath)
+            except:
+                print("Error removing file: " + tmpPath)
+                continue
 
 toc = time.perf_counter()
 
