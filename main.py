@@ -4,6 +4,8 @@
 #Sometimes the new file is actually larger. Don't understand why, I just included a check to see if we actually save space
 #Modify starting parameters, and make sure the temp folder exists.
 
+#Could do with some additional error handling, or check if input file is actually an image. Gives errors now when loading videos.
+
 import cv2
 import os
 import shutil
