@@ -8,7 +8,6 @@
 
 import cv2
 import os
-import shutil
 import defsImageManipulation as dim #early attempt to have a library of image manipulations
 import time
 
